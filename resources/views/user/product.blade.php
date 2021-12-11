@@ -1,65 +1,28 @@
-@extends('layout.template')
+@extends('template.home')
 
-@section('aside')
-<aside class=" flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-sm-top pb-sm-0 pb-3">
-    <div class="bg-light border rounded-5 p-1 h-100 sticky-top">
-        <dl class="nav nav-pills flex-sm-column flex-row mb-auto justify-content-between text-truncate">
-            
-            <dt class="nav-item">
-                <a href="#" class="nav-link px-2 text-truncate">
-                    <span class="d-none d-sm-inline">Kategori</span>
-                </a>
-            </dt>
-            <dd>Baju</dd>
-            <dd>Celana</dd>
-            <dd>Jaket</dd>
-            <dd>Underware</dd>
-            <dt>
-                <a href="#" class="nav-link px-2 text-truncate">
-                    <span class="d-none d-sm-inline">Keranjang</span>
-                </a>
-            </dt>
-            <dd>beberapa list keranjang</dd>
-            
-        </dl>
-    </div>
-</aside>
+@section('title')
+ Product
 @endsection
 
 @section('content')
-<div class="container bg-light">
-    <h3>Product</h3>
+<section class="module-large">
+    <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <div class="card" style="width: 16rem;" >
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>   
-        </div>
-        <div class="col-sm-4">
-            <div class="card" style="width: 16rem;">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card" style="width: 16rem;">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
+        <div class="col-sm-6 col-sm-offset-3">
+            <h2 class="module-title font-alt">Product</h2>
         </div>
     </div>
-</div>
+    <div class="row multi-columns-row">
+        @foreach($data as $dt)
+        <div class="col-sm-9 col-md-4 col-lg-3">
+            <div class="shop-item">
+                <div class="shop-item-image"><img src="{{ $dt->url_gambar }}" alt="{{ $dt->nama_produk }}"/>
+                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span class="icon-basket">Add To Cart</span></a></div>
+                </div>
+                <h4 class="shop-item-title font-alt"><a href="{{ route('add_to_chart', ['id' => $dt->id]) }}">{{ $dt->nama_produk }}</a></h4>Rp {{ number_format($dt->harga, 2, '.', ',') }}
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
 @endsection
